@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <title>Udaan - API Interface</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+        crossorigin="anonymous">
+
+    </head>
+
+<body ng-controller="apiController">
+    <div class="container">
+        <form class="form-horizontal" name="form" novalidate>
+                <h1>Add Task</h1>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <label>Action</label>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" name="action" class="form-control" ng-model="model.addTask.action" required>
+                        <div class="alert alert-danger" ng-show="(form.action.$touched || form.$submitted) && form.frequency.$error.required">
+                                Action is required
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                            <label>Frequency</label>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" name="frequency" class="form-control" ng-model="model.addTask.frequency">
+                    </div>
+                    <div class="alert alert-danger" ng-show="(form.frequency.$touched || form.$submitted) && form.frequency.$error.required">
+                            Frequency is required
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <label>Post Body</label>
+                </div>
+                <pre>{{model.addTask | json}}</pre>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-5">
+                        <input type="submit" value="Add Task" class="btn btn-primary" ng-disabled="form.$invalid" ng-click="addTask(model.addTask)"/>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <label>Reponse</label>
+                </div>
+                <pre>{{model.addTaskResp | json}}</pre>
+        </form>
+        <form class="form-horizontal" name="form" novalidate>
+            <h1>Add asset</h1>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <label>Type</label>
+                </div>
+                <div class="col-md-5">
+                    <input type="text" name="type" class="form-control" ng-model="model.addAsset.type" required>
+                    <div class="alert alert-danger" ng-show="(form.type.$touched || form.$submitted) && form.username.$error.required">
+                            Asset type is required
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <label>Possible Task Ids (comma separated Mongodb Object Ids)</label>
+                </div>
+                <div class="col-md-5">
+                    <input type="text" name="possibleTasks" class="form-control" ng-model="model.addAsset.possibleTasks">
+                </div>
+                <div class="col-md-2">
+                        <label>Building</label>
+                </div>
+                <div class="col-md-5">
+                    <input type="text" name="name" class="form-control" ng-model="model.addAsset.location.building">
+                </div>
+                <div class="col-md-2">
+                        <label>Floor Number</label>
+                </div>
+                <div class="col-md-5">
+                    <input type="text" name="name" class="form-control" ng-model="model.addAsset.location.floorNo">
+                </div>
+                <div class="col-md-2">
+                        <label>Room Number</label>
+                </div>
+                <div class="col-md-5">
+                    <input type="text" name="name" class="form-control" ng-model="model.addAsset.location.roomNo">
+                </div>
+                <div class="col-md-2">
+                        <label>Tags (comma separated)</label>
+                </div>
+                <div class="col-md-5">
+                    <input type="text" name="name" class="form-control" ng-model="model.addAsset.tags">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <label>Post Body</label>
+            </div>
+            <pre>{{model.addAsset | json}}</pre>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-5">
+                    <input type="submit" value="Add asset" class="btn btn-primary" ng-disabled="form.$invalid" ng-click="addAsset(model.addAsset)"/>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <label>Reponse</label>
+            </div>
+            <pre>{{model.addAssetResp | json}}</pre>
+        </form>
+        <form class="form-horizontal" name="form" novalidate>
+                <h1>Add Worker</h1>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <label>First Name</label>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" name="firstName" class="form-control" ng-model="model.addWorker.firstName" required>
+                        <div class="alert alert-danger" ng-show="(form.firstName.$touched || form.$submitted) && form.firstName.$error.required">
+                                First Name is required
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                            <label>Last Name</label>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" name="lastName" class="form-control" ng-model="model.addWorker.lastName">
+                    </div>
+                    <div class="alert alert-danger" ng-show="(form.lastName.$touched || form.$submitted) && form.lastName.$error.required">
+                            Last Name is required
+                    </div>
+                    <div class="col-md-2">
+                            <label>Skills (comma separated)</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input type="text" name="skills" class="form-control" ng-model="model.addWorker.skills">
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <label>Post Body</label>
+                </div>
+                <pre>{{model.addWorker | json}}</pre>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-5">
+                        <input type="submit" value="Add Worker" class="btn btn-primary" ng-click="addWorker(model.addWorker)"/>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <label>Reponse</label>
+                </div>
+                <pre>{{model.addWorkerResp | json}}</pre>
+        </form>
+        <form class="form-horizontal" name="form" novalidate>
+                <h1>Allocate Task</h1>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <label>Worker Id</label>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" name="workerId" class="form-control" ng-model="model.alloc.workerId" required>
+                        <div class="alert alert-danger" ng-show="(form.workerId.$touched || form.$submitted) && form.workerId.$error.required">
+                                Worker ID is required
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                            <label>Asset Id</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input type="text" name="assetId" class="form-control" ng-model="model.alloc.assetId" required>
+                            <div class="alert alert-danger" ng-show="(form.assetId.$touched || form.$submitted) && form.assetId.$error.required">
+                                    Worker ID is required
+                            </div>
+                        </div>
+                    <div class="col-md-2">
+                            <label>Task Id</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input type="text" name="taskId" class="form-control" ng-model="model.alloc.taskId" required>
+                            <div class="alert alert-danger" ng-show="(form.taskId.$touched || form.$submitted) && form.taskId.$error.required">
+                                    Worker ID is required
+                            </div>
+                        </div>
+                    <div class="col-md-2">
+                            <label>Date and Time to be completed by</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input type="datetime-local" name="taskToBePerformedBy" class="form-control" ng-model="model.alloc.taskToBePerformedBy" required>
+                            <div class="alert alert-danger" ng-show="(form.taskToBePerformedBy.$touched || form.$submitted) && form.taskToBePerformedBy.$error.required">
+                                    Date to complete task required
+                            </div>
+                        </div>
+                </div>
+
+                <div class="col-md-2">
+                    <label>Post Body</label>
+                </div>
+                <pre>{{model.alloc | json}}</pre>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-5">
+                        <input type="submit" value="Add Worker" class="btn btn-primary" ng-disabled="form.$invalid" ng-click="allocateTask(model.alloc)"/>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <label>Reponse</label>
+                </div>
+                <pre>{{model.allocResp | json}}</pre>
+        </form>
+        <form class="form-horizontal" name="form" novalidate>
+            <h1>Get all Assets Task</h1>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-5">
+                    <input type="submit" value="Add Worker" class="btn btn-primary" ng-disabled="form.$invalid" ng-click="allAssets()"/>
+                </div>
+            </div>
+            <div class="col-md-2">
+                    <label>Reponse</label>
+            </div>
+            <div ng-repeat = "asset in model.allAssets">
+                <div>{{asset.type}}</div>
+            </div>
+        </form>
+        <form class="form-horizontal" name="form2" novalidate>
+                <h1>Worker Task</h1>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <label>Worker Id</label>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" name="workerId" class="form-control" ng-model="model.workerId" required>
+                        <div class="alert alert-danger" ng-show="(form2.workerId.$touched || form2.$submitted) && form2.workerId.$error.required">
+                                Worker ID is required
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <label>Post Body</label>
+                </div>
+                <pre>{{model.alloc | json}}</pre>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-5">
+                        <input type="submit" value="Get Worker tasks" class="btn btn-primary" ng-disabled="form.$invalid" ng-click="workerTasks(model.workerId)"/>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <label>Reponse</label>
+                </div>
+                <pre>{{model.workerTasks | json}}</pre>
+        </form>
+    </div>
+    <br><br><br><br>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular-resource.min.js"></script>
+    <script src="./app/apiService.js"></script>
+    <script src="./app/app.js"></script>
+    <script src="./app/apiController.js"></script>
+</body>
+
+</html>
