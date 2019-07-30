@@ -35,3 +35,7 @@
 ## Open front end interface
 
 1. Open /front/index.html in browser.
+
+## Preview
+
+![Preview](images/img1.png)
